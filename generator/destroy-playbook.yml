@@ -1,0 +1,16 @@
+- hosts: localhost
+  
+  vars:
+    ansible_path: "{{base_path}}/../ansible"
+    dockerfile_path: "{{base_path}}/.."
+
+  tasks:
+    - name: "Delete file: {{ansible_path}}/{{image}}.yml"
+      file: path={{ansible_path}}/{{image}}.yml state=absent
+
+    - name: "Delete file: {{ansible_path}}/hosts/hosts.{{image}}"
+      file: path={{ansible_path}}/hosts/hosts.{{image}} state=absent
+
+    - name: "Delete file: {{dockerfile_path}}/Dockerfile.{{image}}"
+      file: path={{dockerfile_path}}/Dockerfile.{{image}} state=absent
+

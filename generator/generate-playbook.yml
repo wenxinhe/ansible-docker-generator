@@ -1,0 +1,22 @@
+- hosts: localhost
+  
+  vars:
+    ansible_path: "{{base_path}}/../ansible"
+    dockerfile_path: "{{base_path}}/.."
+
+  tasks:
+    - name: "Exist: {{ansible_path}}"
+      file: path={{ansible_path}} state=directory
+
+    - name: "New file: {{ansible_path}}/{{image}}.yml"
+      copy: src=template-image.yml dest={{ansible_path}}/{{image}}.yml
+
+    - name: "Exist: {{ansible_path}}"
+      file: path={{ansible_path}}/hosts state=directory
+
+    - name: "New file: {{ansible_path}}/hosts/hosts.{{image}}"
+      copy: src=hosts.template-image dest={{ansible_path}}/hosts/hosts.{{image}}
+
+    - name: "New file: {{dockerfile_path}}/Dockerfile.{{image}}"
+      template: src=Dockerfile.template-image dest={{dockerfile_path}}/Dockerfile.{{image}}
+
