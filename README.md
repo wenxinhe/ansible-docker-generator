@@ -21,7 +21,7 @@ docker build -t tomcat-image -f Dockerfile.tomcat-image .
 
 ## Destroy dockerfile
 
-If you don't want this dockerfile any more, you can destroy it using:
+If you don't need this dockerfile any more, you can destroy it using:
 
 ```
 generate/destroy.sh tomcat-image
