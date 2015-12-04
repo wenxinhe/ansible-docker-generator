@@ -2,6 +2,11 @@ FROM williamyeh/ansible:centos6
 #FROM williamyeh/ansible:centos7
 #FROM williamyeh/ansible:ubuntu14.04
 
+# Add Rhel repos
+RUN rm -f /etc/yum.repos.d/*
+COPY package-repos/Rhel-zte.repo /etc/yum.repos.d/
+RUN yum update bash
+
 # Add playbooks to the Docker image
 ADD ansible /srv/example/
 WORKDIR /srv/example
@@ -12,3 +17,4 @@ RUN ansible-playbook {{image}}.yml -i hosts/hosts.{{image}} -c local
 # Other Dockerfile directives are still valid
 #EXPOSE 22 3000 80
 #ENTRYPOINT ["/usr/local/bin/apachectl", "-DFOREGROUND"]
+#CMD ["/opt/apache-tomcat-7.0.57/bin/catalina.sh", "run"]
